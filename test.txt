@@ -1,0 +1,47 @@
+ESC/Java version ESCJava-2.0.5
+    [0.042 s 36950088 bytes]
+
+IntervalDriver ...
+  Prover started:0.018 s 68620200 bytes
+    [0.866 s 68620200 bytes]
+
+IntervalDriver: joinIntervals(OpenInterval, OpenInterval) ...
+------------------------------------------------------------------------
+IntervalDriver.java:24: Warning: Postcondition possibly not established (Post)
+    }
+    ^
+Associated declaration is "IntervalDriver.java", line 9, col 8:
+      @ ensures \result.low == \result.high ...
+        ^
+Execution trace information:
+    Executed else branch in "IntervalDriver.java", line 16, col 1.
+    Executed then branch in "IntervalDriver.java", line 21, col 39.
+    Executed then branch in "IntervalDriver.java", line 22, col 42.
+    Executed return in "IntervalDriver.java", line 23, col 1.
+
+------------------------------------------------------------------------
+    [0.316 s 73898568 bytes]  failed
+
+IntervalDriver: IntervalDriver() ...
+    [0.022 s 73898568 bytes]  passed
+  [1.204 s 73898568 bytes total]
+
+OpenInterval ...
+    [0.0040 s 73898568 bytes]
+
+OpenInterval: OpenInterval(int, int) ...
+    [0.024 s 79176888 bytes]  passed
+
+OpenInterval: OpenInterval(int) ...
+    [0.014 s 79176888 bytes]  passed
+
+OpenInterval: getLow() ...
+    [0.016 s 79176888 bytes]  passed
+
+OpenInterval: getHigh() ...
+    [0.0060 s 79176888 bytes]  passed
+
+OpenInterval: equals(OpenInterval) ...
+    [0.011 s 79176888 bytes]  passed
+  [0.076 s 79176888 bytes total]
+1 warning

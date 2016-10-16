@@ -13,13 +13,18 @@ public class IntervalDriver {
     OpenInterval joinIntervals(OpenInterval i1, OpenInterval i2) {
 	// Returns empty interval if i1 and i2 are non-overlapping.
 	// if (i1.getHigh() < i2.getLow() || i2.getHigh() < i1.getLow()) {
-	if (i1.getHigh() <= i2.getLow() && i2.getHigh() <= i1.getLow()) {
+	
+	//System.err.println(i1 + ", " + i2);
+	
+	if (i1.getLow() <= i2.getHigh() || i2.getLow() < i1.getHigh()) {
 	    return new OpenInterval(0);
 	}
 
 	// Joins i1 and i2.
-	int low = i1.getLow() < i2.getLow() ? i1.getLow() : i2.getLow();
-	int high = i1.getHigh() > i2.getHigh() ? i1.getHigh() : i2.getHigh();
+	//int low = i1.getLow() < i2.getLow() ? i1.getLow() : i2.getLow();
+	//int high = i1.getHigh() > i2.getHigh() ? i1.getHigh() : i2.getHigh();
+	int low = Math.min(i1.getLow(), i2.getLow());
+	int high = Math.max(i1.getHigh(), i2.getHigh());
 	return new OpenInterval(low, high);
     }
 }
