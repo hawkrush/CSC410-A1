@@ -16,16 +16,17 @@ public class IntervalDriver {
 	
 	//System.err.println(i1 + ", " + i2);
 	
-	if (i1.getLow() <= i2.getHigh() || i2.getLow() < i1.getHigh()) {
+	if (i1.getLow() < i2.getHigh() || i2.getLow() < i1.getHigh()) {
 	    return new OpenInterval(0);
 	}
 
 	// Joins i1 and i2.
-	//int low = i1.getLow() < i2.getLow() ? i1.getLow() : i2.getLow();
-	//int high = i1.getHigh() > i2.getHigh() ? i1.getHigh() : i2.getHigh();
-	int low = Math.min(i1.getLow(), i2.getLow());
-	int high = Math.max(i1.getHigh(), i2.getHigh());
-	return new OpenInterval(low, high);
+	int low = i1.getLow() < i2.getLow() ? i1.getLow() : i2.getLow();
+	int high = i1.getHigh() > i2.getHigh() ? i1.getHigh() : i2.getHigh();
+        //int low = Math.min(i1.getLow(), i2.getLow());
+	//int high = Math.max(i1.getHigh(), i2.getHigh());
+        //@ assert low <= high;
+        return new OpenInterval(low, high);
     }
 }
 
@@ -45,15 +46,19 @@ class OpenInterval{
       @ ensures \typeof(this.low) <: \type(int);
       @ ensures \typeof(this.high) <: \type(int);
       @ ensures this.low <= this.high;
+      @ ensures (low <= high ==> (this.low == low && this.high == high))
+                || (low > high ==> this.low == this.high);
       @*/
     public OpenInterval(int low, int high){
 	//this.low = low;
 	//this.high = high;
-	if (low <= high) {
+        if (low <= high) {
 	    this.low = low;
 	    this.high = high;
-	} else {
-	    this == null;
+	} 
+        else {
+	    this.low = 0;
+            this.high = 0;
 	}
     }
     
