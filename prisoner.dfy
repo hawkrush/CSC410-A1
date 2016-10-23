@@ -26,11 +26,10 @@ method benda(L:array<int>, v0:int, v1:int) returns (x:int, y:int)
   i,x,y := 0,v0,v1;
   while (i < L.Length)
     // You must provide appropriate loop invariants here
-    invariant L != null
-              && i < L.Length ==> forall j::i <= j < L.Length ==> i <= L[j] < L.Length
-              && i == L.Length ==> forall j::0 <= j < L.Length ==> L[j] == j
-              && 0 <= x <= v1
-              && 0 <= y <= v1;
+    invariant L != null;
+    invariant i < L.Length ==> forall j::i <= j < L.Length ==> i <= L[j] < L.Length
+              && i == L.Length ==> forall j::0 <= j < L.Length ==> L[j] == j;
+    invariant {x, y} == {v0, v1};
     {
     if (L[i] != i) { // if mind of i does not match with body i
       x,L[i] := L[i],x; // swap mind between i and x
