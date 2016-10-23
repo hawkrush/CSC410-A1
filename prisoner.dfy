@@ -28,7 +28,9 @@ method benda(L:array<int>, v0:int, v1:int) returns (x:int, y:int)
     // You must provide appropriate loop invariants here
     invariant 0 <= i <= L.Length
               && L != null
-              && 0 <= i < L.Length ==> forall j::i <= j < L.Length ==> i <= L[j] < L.Length;
+              && 0 <= i < L.Length ==> forall j::i <= j < L.Length ==> i <= L[j] < L.Length
+              && 0 <= x <= L.Length + 1
+              && 0 <= y <= L.Length + 1;
 
     {
     if (L[i] != i) { // if mind of i does not match with body i
@@ -59,16 +61,14 @@ method cycle(L:array<int>, i:int, a:int, s:set<int>) returns (x:int)
   // You must provide appropriate pre-conditions here.
   requires L != null;
   requires 0 <= i < L.Length;
-          //requires a !in s;
-          //requires i < a < L.Length;
-  requires i < a < L.Length;
-  requires L[a] in s && a !in s;
   requires s == (set z | i < z < L.Length && L[z] != z);
+  requires a in s;
 
   modifies L;
   decreases s;
 
   // You must provide appropriate post-conditions here.
+  ensures 0 <= x < L.Length;
 {
   x := a;
   if (L[x] != i) { // mind and body do not match.
