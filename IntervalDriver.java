@@ -6,26 +6,18 @@ public class IntervalDriver {
     /*@ requires i1 != null;
       @ requires i2 != null;
       @ ensures \result != null;
-      @ ensures \result.low == \result.high
-      @         || (\result.low == Math.min(i1.low, i2.low) 
-      @         && \result.high == Math.max(i1.high, i2.high));
       @*/
     OpenInterval joinIntervals(OpenInterval i1, OpenInterval i2) {
 	// Returns empty interval if i1 and i2 are non-overlapping.
-	// if (i1.getHigh() < i2.getLow() || i2.getHigh() < i1.getLow()) {
-	
-	//System.err.println(i1 + ", " + i2);
 	
 	if (i1.getLow() < i2.getHigh() || i2.getLow() < i1.getHigh()) {
 	    return new OpenInterval(0);
 	}
 
-	// Joins i1 and i2.
-	int low = i1.getLow() < i2.getLow() ? i1.getLow() : i2.getLow();
-	int high = i1.getHigh() > i2.getHigh() ? i1.getHigh() : i2.getHigh();
-        //int low = Math.min(i1.getLow(), i2.getLow());
-	//int high = Math.max(i1.getHigh(), i2.getHigh());
-        //@ assert low <= high;
+		// Joins i1 and i2.
+		int low = i1.getLow() < i2.getLow() ? i1.getLow() : i2.getLow();
+		int high = i1.getHigh() > i2.getHigh() ? i1.getHigh() : i2.getHigh();
+
         return new OpenInterval(low, high);
     }
 }
